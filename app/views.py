@@ -18,15 +18,17 @@ def mcb():
     try:
         ping = server.ping()
     except:
-        stat = 'Down'
-        playnum = 'No'
+        stat = 'Offline'
+        playnum = 'None'
     else:
-        stat = 'Up'
+        stat = 'Online'
 
-    if stat == 'Up':
+    if stat == 'Online':
         # Get players info
         playnum = server.status().players.online
+        players = server.query().players.names
 
     return render_template('mcb.html',
                            stat=stat,
-                           pnum=playnum)
+                           pnum=playnum,
+                           names=players)

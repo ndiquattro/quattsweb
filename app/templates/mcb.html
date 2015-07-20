@@ -6,6 +6,12 @@
 </head>
 <body>
 The server is {{ stat }}! <br><br>
-There are {{ pnum }} friends playing right now!
+There are {{ pnum }} friends playing right now! <br><br>
+Here who's playing:
+<ul>
+    {% for name in names %}
+    <li>{{ name }}</li>
+    {% endfor %}
+</ul>
 </body>
 </html>
