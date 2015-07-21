@@ -13,22 +13,25 @@ def mcb():
 
     # Look up server
     server = MinecraftServer.lookup('98.244.54.58:25565')
+    ip = '{}:{}'.format(server.host, server.port)
 
     # Ping the server
+    stat = None
     try:
         ping = server.ping()
     except:
-        stat = 'Offline'
         playnum = 'None'
     else:
-        stat = 'Online'
+        stat = 1
 
-    if stat == 'Online':
-        # Get players info
-        playnum = server.status().players.online
+    if stat == 1:
+        # Get query info
+        rawinfo = server.query().raw
         players = server.query().players.names
 
     return render_template('mcb.html',
                            stat=stat,
-                           pnum=playnum,
-                           names=players)
+                           pnum=int(rawinfo['numplayers']),
+                           names=players,
+                           ver=rawinfo['version'],
+                           ip=ip)
