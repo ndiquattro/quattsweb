@@ -2,11 +2,13 @@ from flask import render_template
 from app import app
 from mcstatus import MinecraftServer
 
+
 @app.route('/')
 @app.route('/index')
 def index():
 
     return "Under Construction [Man digging gif]"
+
 
 @app.route('/mcb')
 def mcb():
@@ -17,6 +19,8 @@ def mcb():
 
     # Ping the server
     stat = None
+    rawinfo = None
+    players = None
     try:
         ping = server.ping()
     except:

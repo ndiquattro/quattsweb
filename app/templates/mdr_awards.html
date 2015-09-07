@@ -1,0 +1,25 @@
+{% extends "mdr_base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="text-center">
+        <dl class="dl-horizontal">
+            <dt class="text-center">Longest Streak</dt>
+            {% for idx, person in streak.iterrows() %}
+            <dd>{{ person.Names }} ({{ person.Winner }})</dd>
+            {% endfor %}
+
+            <dt>Most Appearances</dt>
+            {% for idx, person in apps.iterrows() %}
+            <dd>{{ person.Names }} ({{ person.Total }})</dd>
+            {% endfor %}
+
+            <dt>Most Ties</dt>
+            {% for idx, person in ties.iterrows() %}
+            <dd>{{ person.Names }} ({{ person.Ties }})</dd>
+            {% endfor %}
+        </dl>
+        </div>
+    </div>
+</div>
+{% endblock %}

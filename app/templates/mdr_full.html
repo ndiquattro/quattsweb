@@ -1,0 +1,28 @@
+{% extends "mdr_base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>Sorted by Wins</h1>
+        <table class="table table-striped">
+            <tr>
+                <th class="text-center">Rank</th>
+                <th>Name</th>
+                <th class="text-center">Wins</th>
+                <th class="text-center">Runner-ups</th>
+                <th class="text-center">Losses</th>
+                <th class="text-center">Ties</th>
+            </tr>
+            {% for idx, person in ranks.iterrows() %}
+            <tr>
+                <td class="text-center">{{ idx + 1 }}</td>
+                <td><a href="/midnightstandings/profile?name={{ person.Names|replace(' ', '_' )}}">{{ person.Names }}</a></td>
+                <td class="text-center">{{ person.Winner }}</td>
+                <td class="text-center">{{ person['Runnerup'] }}</td>
+                <td class="text-center">{{ person['Lastplace'] }}</td>
+                <td class="text-center">{{ person.Ties }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

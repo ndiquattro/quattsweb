@@ -1,0 +1,100 @@
+{% extends "mdr_base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="text-center">
+            <h1>{{ name }}</h1>
+            <h6><a href="http://lmgtfy.com/?q={{ name}}" target="_blank">(Who is this?)</a></h6>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="text-center">Wins</th>
+                        <th class="text-center">Runner ups</th>
+                        <th class="text-center">Losses</th>
+                        <th class="text-center">Ties</th>
+                        <th class="text-center">Total</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <th class="text-center">Count</th>
+                    <td class="text-center">{{ counts.Winner }}</td>
+                    <td class="text-center">{{ counts.Runnerup }}</td>
+                    <td class="text-center">{{ counts.Lastplace }}</td>
+                    <td class="text-center">{{ counts.Ties }}</td>
+                    <td class="text-center" rowspan="2" style="vertical-align:middle">{{ counts.Total}}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">Percentage</th>
+                    <td class="text-center">{{ counts.Winper|round(2) }}%</td>
+                    <td class="text-center">{{ counts.Runper|round(2) }}%</td>
+                    <td class="text-center">{{ counts.Lastper|round(2) }}%</td>
+                    <td class="text-center">{{ counts.Tieper|round(2) }}%</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>Appearances</h2>
+        <table class="table">
+            <tr>
+                <th>Show Number</th>
+                <th>Air Date</th>
+                <th>Winner</th>
+                <th>Runner-up</th>
+                <th>Last place</th>
+            </tr>
+            {% for idx, show in shows.iterrows() %}
+            <tr>
+                <td class="text-center">{{ show['No.'] }}</td>
+                <td>{{ show.airdate }}</td>
+                <td {% if show.Winner == name %}
+                    class="info text-center"
+                    {% else %}
+                    class="text-center"
+                    {% endif %}>
+                    {% if show.Winner != 'None' %}
+                    <a href="/midnightstandings/profile?name={{ show.Winner|replace(' ', '_' )}}">{{ show.Winner }}</a>
+                    {% else %}
+                    {{ show.Winner }}
+                    {% endif %}
+                </td>
+                {% if 'tie' not in show.Runnerup %}
+                <td {% if name in show.Runnerup %}
+                    class="info text-center"
+                    {% else %}
+                    class="text-center"
+                    {% endif %}>
+                    <a href="/midnightstandings/profile?name={{ show.Runnerup|replace(' ', '_' )}}">{{ show.Runnerup }}</a>
+                </td>
+                {% else %}
+                {% set p1 = show.Runnerup.split(' and ')[0] %}
+                {% set p2 = show.Runnerup.split(' and ')[1][:-6] %}
+                <td {% if name in show.Runnerup %}
+                    class="info text-center"
+                    {% else %}
+                    class="text-center"
+                    {% endif %}>
+                    <a href="/midnightstandings/profile?name={{ p1|replace(' ', '_' )}}">{{ p1 }}</a> and
+                    <a href="/midnightstandings/profile?name={{ p2|replace(' ', '_' )}}">{{ p2 }}</a> (tie)
+                </td>
+                {% endif %}
+                <td {% if show.Lastplace == name %}
+                    class="info text-center"
+                    {% else %}
+                    class="text-center"
+                    {% endif %}>
+                    {% if show.Lastplace != 'None' %}
+                    <a href="/midnightstandings/profile?name={{ show.Lastplace|replace(' ', '_' )}}">{{ show.Lastplace }}</a>
+                    {% else %}
+                    {{ show.Lastplace }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@midnight standings</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h1 class="text-center">@midnight standings</h1>
+        <ul class="nav nav-pills nav-justified">
+            <li role="presentation"><a href="/midnightstandings/top">Top 10</a></li>
+            <li role="presentation"><a href="/midnightstandings/awards">Awards</a></li>
+            <li role="presentation"><a href="#">Statistics</a></li>
+            <li role="presentation"><a href="/midnightstandings/full">Full Rankings</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+        </ul>
+    </div>
+</div>
+{% block content %}{% endblock %}
+</body>
+</html>
