@@ -5,6 +5,7 @@ import pandas as pd
 
 
 @app.route('/midnightstandings/top')
+@app.route('/midnightstandings/')
 def mdr_top():
 
     # Retrieve information
