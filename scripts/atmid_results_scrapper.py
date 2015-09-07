@@ -1,3 +1,4 @@
+# coding=utf-8
 # Pulls @midnight results from wikipedia and saves them.
 import wikipedia
 from bs4 import BeautifulSoup
