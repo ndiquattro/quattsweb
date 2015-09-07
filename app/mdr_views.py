@@ -2,6 +2,13 @@ from flask import render_template, request
 from app import app
 import sqlite3 as lite
 import pandas as pd
+import os
+
+# Database path
+if os.uname()[0] == 'Darwin':
+    DBPATH = 'scripts/midnight_standings.db'
+else:
+    DBPATH = 'quattsweb/scripts/midnight_standings.db'
 
 
 @app.route('/midnightstandings/top')
@@ -9,7 +16,7 @@ import pandas as pd
 def mdr_top():
 
     # Retrieve information
-    con = lite.connect('scripts/midnight_standings.db')
+    con = lite.connect(DBPATH)
     with con:
         counts = pd.read_sql_query('SELECT * FROM counts', con)
 
@@ -31,7 +38,7 @@ def mdr_top():
 def mdr_full():
 
     # Retrieve information
-    con = lite.connect('scripts/midnight_standings.db')
+    con = lite.connect(DBPATH)
     with con:
         counts = pd.read_sql_query('SELECT * FROM counts', con)
 
@@ -47,7 +54,7 @@ def mdr_full():
 def mdr_awards():
 
     # Get data
-    con = lite.connect('scripts/midnight_standings.db')
+    con = lite.connect(DBPATH)
     with con:
         counts = pd.read_sql_query('SELECT * FROM counts', con)
 
@@ -79,7 +86,7 @@ def profile():
     # Get info about this person
     csql = 'SELECT * FROM counts WHERE Names = "{}"'.format(name)
     ssql = 'SELECT * FROM shows WHERE Winner="{0}" OR Runnerup LIKE "%{0}%" OR Lastplace="{0}"'.format(name)
-    con = lite.connect('scripts/midnight_standings.db')
+    con = lite.connect(DBPATH)
     with con:
         counts = pd.read_sql_query(csql, con)
         shows = pd.read_sql_query(ssql, con)
