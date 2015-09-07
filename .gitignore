@@ -1,1 +1,8 @@
+
+# Python
 *.pyc
+.idea/
+.Python
+qflask/
+midnight_standings.db
+run.py
