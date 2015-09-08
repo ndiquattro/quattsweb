@@ -4,6 +4,8 @@ import wikipedia
 from bs4 import BeautifulSoup
 import pandas as pd
 import sqlite3 as lite
+import os
+import datetime
 
 
 # Returns results table from wiki page
@@ -91,3 +93,7 @@ con = lite.connect('midnight_standings.db')
 with con:
     bigdf.to_sql('shows', con, index=False, if_exists='replace', dtype=ssql)
     finaldf.to_sql('counts', con, index=False, if_exists='replace', dtype=csql)
+
+# Log results
+with open(str(os.getcwd()) + '/log.txt', 'a') as f:
+    f.write(str(datetime.datetime.now()) + ",success\n")

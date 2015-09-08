@@ -73,10 +73,16 @@ def mdr_stats():
     # Most Ties
     ties = counts[counts.Ties == max(counts.Ties)]
 
+    # Means
+    mns = counts.mean(axis=0).round(2)
+    sds = counts.std(axis=0).round(2)
+
     return render_template('mdr_stats.html',
                            streak=streak,
                            apps=apps,
                            ties=ties,
+                           means=mns,
+                           stds=sds,
                            title='@midnight standings - Statistics')
 
 
