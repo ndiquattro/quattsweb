@@ -76,7 +76,8 @@ def mdr_stats():
     return render_template('mdr_stats.html',
                            streak=streak,
                            apps=apps,
-                           ties=ties)
+                           ties=ties,
+                           title='@midnight standings - Statistics')
 
 
 @app.route('/midnightstandings/profile')
@@ -111,3 +112,8 @@ def recent():
     return render_template("mdr_recent.html",
                            shows=rshows,
                            title='@midnight standings - Recent Results')
+
+@app.route('/midnightstandings/about')
+def about():
+    return render_template("mdr_about.html",
+                           title='@midnight standings - About')
