@@ -100,6 +100,7 @@ def profile():
                            name=name,
                            title='@midnight standings - {}'.format(name))
 
+
 @app.route('/midnightstandings/recent')
 def recent():
 
@@ -112,6 +113,7 @@ def recent():
     return render_template("mdr_recent.html",
                            shows=rshows,
                            title='@midnight standings - Recent Results')
+
 
 @app.route('/midnightstandings/about')
 def about():
