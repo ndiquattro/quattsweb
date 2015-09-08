@@ -48,7 +48,7 @@
             </tr>
             {% for idx, show in shows.iterrows() %}
             <tr>
-                <td class="text-center">{{ show['No.'] }}</td>
+                <td class="text-center">{{ show.shownum }}</td>
                 <td>{{ show.airdate }}</td>
                 <td {% if show.Winner == name %}
                     class="info text-center"

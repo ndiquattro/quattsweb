@@ -1,0 +1,49 @@
+{% extends "mdr_base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>Last Four Shows</h2>
+        <table class="table">
+            <tr>
+                <th>Show Number</th>
+                <th>Air Date</th>
+                <th>Winner</th>
+                <th>Runner-up</th>
+                <th>Last place</th>
+            </tr>
+            {% for idx, show in shows.iterrows() %}
+            <tr>
+                <td class="text-center">{{ show.shownum }}</td>
+                <td>{{ show.airdate }}</td>
+                <td class="text-center">
+                    {% if show.Winner != 'None' %}
+                    <a href="/midnightstandings/profile?name={{ show.Winner|replace(' ', '_' )}}">{{ show.Winner }}</a>
+                    {% else %}
+                    {{ show.Winner }}
+                    {% endif %}
+                </td>
+                {% if 'tie' not in show.Runnerup %}
+                <td class="text-center">
+                    <a href="/midnightstandings/profile?name={{ show.Runnerup|replace(' ', '_' )}}">{{ show.Runnerup }}</a>
+                </td>
+                {% else %}
+                {% set p1 = show.Runnerup.split(' and ')[0] %}
+                {% set p2 = show.Runnerup.split(' and ')[1][:-6] %}
+                <td class="text-center">
+                    <a href="/midnightstandings/profile?name={{ p1|replace(' ', '_' )}}">{{ p1 }}</a> and
+                    <a href="/midnightstandings/profile?name={{ p2|replace(' ', '_' )}}">{{ p2 }}</a> (tie)
+                </td>
+                {% endif %}
+                <td class="text-center">
+                    {% if show.Lastplace != 'None' %}
+                    <a href="/midnightstandings/profile?name={{ show.Lastplace|replace(' ', '_' )}}">{{ show.Lastplace }}</a>
+                    {% else %}
+                    {{ show.Lastplace }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

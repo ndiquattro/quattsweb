@@ -4,5 +4,5 @@
 .idea/
 .Python
 qflask/
-midnight_standings.db
+scripts/midnight_standings.db
 run.py

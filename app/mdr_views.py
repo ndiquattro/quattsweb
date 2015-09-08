@@ -98,3 +98,16 @@ def profile():
                            shows=shows,
                            name=name,
                            title='@midnight standings - {}'.format(name))
+
+@app.route('/midnightstandings/recent')
+def recent():
+
+    # Connect to db
+    rsql = 'SELECT * FROM shows ORDER BY shownum DESC LIMIT 4'
+    con = lite.connect(DBPATH)
+    with con:
+        rshows = pd.read_sql_query(rsql, con)
+
+    return render_template("mdr_recent.html",
+                           shows=rshows,
+                           title='@midnight standings - Recent Results')

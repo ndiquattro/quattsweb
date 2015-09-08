@@ -22,7 +22,8 @@ def dfmaker(pagetitle):
     newnames = {'Original air date[3]': 'airdate',
                 'Original air date': 'airdate',
                 'Runner-up': 'Runnerup',
-                'Last place': 'Lastplace'}
+                'Last place': 'Lastplace',
+                'No.': 'shownum'}
     yeares.rename(columns=newnames,
                   inplace=True)
 
@@ -84,7 +85,9 @@ csql = {'Names': 'TEXT', 'Winner': 'INT', 'Runnerup': 'INT',
         'Lastplace': 'INT', 'Ties': 'INT', 'Total': 'INT', 'Winper': 'FLOAT',
         'Runper': 'FLOAT', 'Lastper': 'FLOAT', 'Tieper': 'FLOAT'}
 
+ssql = {'shownum': 'INT'}
+
 con = lite.connect('midnight_standings.db')
 with con:
-    bigdf.to_sql('shows', con, index=False, if_exists='replace')
+    bigdf.to_sql('shows', con, index=False, if_exists='replace', dtype=ssql)
     finaldf.to_sql('counts', con, index=False, if_exists='replace', dtype=csql)
