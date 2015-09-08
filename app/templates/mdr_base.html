@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@midnight standings</title>
+    <title>{{ title }}</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -12,20 +12,50 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</head>
+
+    <!-- Twitter JavaScript -->
+   <script>window.twttr = (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+              if (d.getElementById(id)) return t;
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "https://platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js, fjs);
+
+              t._e = [];
+              t.ready = function(f) {
+                t._e.push(f);
+              };
+
+              return t;
+            }(document, "script", "twitter-wjs"));
+   </script>
+    </head>
 <body>
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-8 col-md-offset-2">
         <h1 class="text-center">@midnight standings</h1>
         <ul class="nav nav-pills nav-justified">
             <li role="presentation"><a href="/midnightstandings/top">Top 10</a></li>
-            <li role="presentation"><a href="/midnightstandings/awards">Awards</a></li>
-            <li role="presentation"><a href="#">Statistics</a></li>
+            <li role="presentation"><a href="/midnightstandings/stats">Statistics</a></li>
+            <li role="presentation"><a href="/midnightstandings/recent">Recent Results</a></li>
             <li role="presentation"><a href="/midnightstandings/full">Full Rankings</a></li>
-            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="/midnightstandings/about">About</a></li>
         </ul>
     </div>
 </div>
 {% block content %}{% endblock %}
+<footer class="footer">
+    <div class="col-md-2 col-md-offset-8">
+    <p class="text-right text-muted">Share: <a class="twitter-share-button text-right" href="https://twitter.com/intent/" data-count="none" data-size="default" data-via='nickof4'>Tweet</a><br>
+    Source: <a href="https://en.wikipedia.org/wiki/List_of_@midnight_episodes">Wikipedia</a><br>
+    Contact: <a href="https://twitter.com/nickof4">Twitter</a></p>
+    </div>
+</footer>
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

@@ -31,7 +31,8 @@ def mdr_top():
 
     return render_template('mdr_top.html',
                            names=names,
-                           cats=cats)
+                           cats=cats,
+                           title='@midnight standings - Top 10')
 
 
 @app.route('/midnightstandings/full')
@@ -47,11 +48,12 @@ def mdr_full():
     ranks = counts.sort(scols, ascending=False).reset_index()
 
     return render_template('mdr_full.html',
-                           ranks=ranks)
+                           ranks=ranks,
+                           title='@midnight standings - Full Rankings')
 
 
-@app.route('/midnightstandings/awards')
-def mdr_awards():
+@app.route('/midnightstandings/stats')
+def mdr_stats():
 
     # Get data
     con = lite.connect(DBPATH)
@@ -71,7 +73,7 @@ def mdr_awards():
     # Most Ties
     ties = counts[counts.Ties == max(counts.Ties)]
 
-    return render_template('mdr_awards.html',
+    return render_template('mdr_stats.html',
                            streak=streak,
                            apps=apps,
                            ties=ties)
@@ -94,4 +96,5 @@ def profile():
     return render_template("mdr_profile.html",
                            counts=counts.to_dict(orient='records')[0],
                            shows=shows,
-                           name=name)
+                           name=name,
+                           title='@midnight standings - {}'.format(name))
