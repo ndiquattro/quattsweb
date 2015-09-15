@@ -51,11 +51,11 @@
     <div class="col-md-8 col-md-offset-2">
         <h1 class="text-center">@midnight standings</h1>
         <ul class="nav nav-pills nav-justified">
-            <li role="presentation"><a href="/midnightstandings/top">Top 10</a></li>
-            <li role="presentation"><a href="/midnightstandings/stats">Statistics</a></li>
-            <li role="presentation"><a href="/midnightstandings/recent">Recent Results</a></li>
-            <li role="presentation"><a href="/midnightstandings/full">Full Rankings</a></li>
-            <li role="presentation"><a href="/midnightstandings/about">About</a></li>
+            <li role="presentation"><a href="{{ url_for('midnightstandings.top') }}">Top 10</a></li>
+            <li role="presentation"><a href="{{ url_for('midnightstandings.stats') }}">Statistics</a></li>
+            <li role="presentation"><a href="{{ url_for('midnightstandings.recent') }}">Recent Results</a></li>
+            <li role="presentation"><a href="{{ url_for('midnightstandings.full') }}">Full Rankings</a></li>
+            <li role="presentation"><a href="{{ url_for('midnightstandings.about') }}">About</a></li>
         </ul>
     </div>
 </div>

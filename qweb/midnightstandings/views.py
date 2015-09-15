@@ -1,4 +1,5 @@
-from flask import render_template, request
+from flask import render_template, request, url_for
+from . import midnightstandings
 import sqlite3 as lite
 import pandas as pd
 import os
@@ -7,7 +8,7 @@ import os
 if os.uname()[0] == 'Darwin':
     DBPATH = 'scripts/midnight_standings.db'
 else:
-    DBPATH = 'quattsweb/scripts/midnight_standings.db'
+    DBPATH = 'scripts/midnight_standings.db'
 
 
 @midnightstandings.route('/')
