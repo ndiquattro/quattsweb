@@ -1,16 +1,8 @@
 from flask import render_template
-from app import app
 from mcstatus import MinecraftServer
 
 
-@app.route('/')
-@app.route('/index')
-def index():
-
-    return "Under Construction [Man digging gif]"
-
-
-@app.route('/mcb')
+@mcb.route('/')
 def mcb():
 
     # Look up server
@@ -23,7 +15,8 @@ def mcb():
     players = None
     try:
         ping = server.ping()
-    except:
+    except Exception as e:
+        print e
         playnum = 'None'
     else:
         stat = 1

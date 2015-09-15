@@ -1,5 +1,4 @@
 from flask import render_template, request
-from app import app
 import sqlite3 as lite
 import pandas as pd
 import os
@@ -11,9 +10,8 @@ else:
     DBPATH = 'quattsweb/scripts/midnight_standings.db'
 
 
-@app.route('/midnightstandings/top')
-@app.route('/midnightstandings/')
-def mdr_top():
+@midnightstandings.route('/')
+def top():
 
     # Retrieve information
     con = lite.connect(DBPATH)
@@ -21,22 +19,25 @@ def mdr_top():
         counts = pd.read_sql_query('SELECT * FROM counts', con)
 
     # Absolute counts
-    winners = counts.sort(['Winner', 'Winper'], ascending=False).head(10).reset_index()
-    runners = counts.sort(['Runnerup', 'Runper'], ascending=False).head(10).reset_index()
-    losers = counts.sort(['Lastplace', 'Lastper'], ascending=False).head(10).reset_index()
+    winners = counts.sort(['Winner', 'Winper'],
+                          ascending=False).head(10).reset_index()
+    runners = counts.sort(['Runnerup', 'Runper'],
+                          ascending=False).head(10).reset_index()
+    losers = counts.sort(['Lastplace', 'Lastper'],
+                         ascending=False).head(10).reset_index()
 
     # Control
     cats = [winners, runners, losers]
     names = ['Most Wins', 'Most Runner-ups', 'Most Losses']
 
-    return render_template('mdr_top.html',
+    return render_template('top.html',
                            names=names,
                            cats=cats,
                            title='@midnight standings - Top 10')
 
 
-@app.route('/midnightstandings/full')
-def mdr_full():
+@midnightstandings.route('/full')
+def full():
 
     # Retrieve information
     con = lite.connect(DBPATH)
@@ -47,13 +48,13 @@ def mdr_full():
     scols = ['Winner', 'Runnerup', 'Ties', 'Lastplace']
     ranks = counts.sort(scols, ascending=False).reset_index()
 
-    return render_template('mdr_full.html',
+    return render_template('full.html',
                            ranks=ranks,
                            title='@midnight standings - Full Rankings')
 
 
-@app.route('/midnightstandings/stats')
-def mdr_stats():
+@midnightstandings.route('/stats')
+def stats():
 
     # Get data
     con = lite.connect(DBPATH)
@@ -77,7 +78,7 @@ def mdr_stats():
     mns = counts.mean(axis=0).round(2)
     sds = counts.std(axis=0).round(2)
 
-    return render_template('mdr_stats.html',
+    return render_template('stats.html',
                            streak=streak,
                            apps=apps,
                            ties=ties,
@@ -86,7 +87,7 @@ def mdr_stats():
                            title='@midnight standings - Statistics')
 
 
-@app.route('/midnightstandings/profile')
+@midnightstandings.route('/profile')
 def profile():
 
     # Get Name
@@ -100,14 +101,14 @@ def profile():
         counts = pd.read_sql_query(csql, con)
         shows = pd.read_sql_query(ssql, con)
 
-    return render_template("mdr_profile.html",
+    return render_template("profile.html",
                            counts=counts.to_dict(orient='records')[0],
                            shows=shows,
                            name=name,
                            title='@midnight standings - {}'.format(name))
 
 
-@app.route('/midnightstandings/recent')
+@midnightstandings.route('/recent')
 def recent():
 
     # Connect to db
@@ -116,12 +117,12 @@ def recent():
     with con:
         rshows = pd.read_sql_query(rsql, con)
 
-    return render_template("mdr_recent.html",
+    return render_template("recent.html",
                            shows=rshows,
                            title='@midnight standings - Recent Results')
 
 
-@app.route('/midnightstandings/about')
+@midnightstandings.route('/about')
 def about():
-    return render_template("mdr_about.html",
+    return render_template("about.html",
                            title='@midnight standings - About')
