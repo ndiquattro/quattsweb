@@ -15,7 +15,7 @@
             {% for idx, person in ranks.iterrows() %}
             <tr>
                 <td class="text-center">{{ idx + 1 }}</td>
-                <td><a href="/midnightstandings/profile?name={{ person.Names|replace(' ', '_' )}}">{{ person.Names }}</a></td>
+                <td><a href="{{ url_for('midnightstandings.profile', name=person.Names.replace(' ', '_')) }}">{{ person.Names }}</a></td>
                 <td class="text-center">{{ person.Winner }}</td>
                 <td class="text-center">{{ person['Runnerup'] }}</td>
                 <td class="text-center">{{ person['Lastplace'] }}</td>

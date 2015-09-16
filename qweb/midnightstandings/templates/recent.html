@@ -17,26 +17,26 @@
                 <td>{{ show.airdate }}</td>
                 <td class="text-center">
                     {% if show.Winner != 'None' %}
-                    <a href="/midnightstandings/profile?name={{ show.Winner|replace(' ', '_' )}}">{{ show.Winner }}</a>
+                    <a href="{{ url_for('midnightstandings.profile', name=show.Winner.replace(' ', '_')) }}">{{ show.Winner }}</a>
                     {% else %}
                     {{ show.Winner }}
                     {% endif %}
                 </td>
                 {% if 'tie' not in show.Runnerup %}
                 <td class="text-center">
-                    <a href="/midnightstandings/profile?name={{ show.Runnerup|replace(' ', '_' )}}">{{ show.Runnerup }}</a>
+                    <a href="{{ url_for('midnightstandings.profile', name=show.Runnerup.replace(' ', '_')) }}">{{ show.Runnerup }}</a>
                 </td>
                 {% else %}
                 {% set p1 = show.Runnerup.split(' and ')[0] %}
                 {% set p2 = show.Runnerup.split(' and ')[1][:-6] %}
                 <td class="text-center">
-                    <a href="/midnightstandings/profile?name={{ p1|replace(' ', '_' )}}">{{ p1 }}</a> and
-                    <a href="/midnightstandings/profile?name={{ p2|replace(' ', '_' )}}">{{ p2 }}</a> (tie)
+                    <a href="{{ url_for('midnightstandings.profile', name=p1.replace(' ', '_')) }}">{{ p1 }}</a> and
+                    <a href="{{ url_for('midnightstandings.profile', name=p2.replace(' ', '_')) }}">{{ p2 }}</a> (tie)
                 </td>
                 {% endif %}
                 <td class="text-center">
                     {% if show.Lastplace != 'None' %}
-                    <a href="/midnightstandings/profile?name={{ show.Lastplace|replace(' ', '_' )}}">{{ show.Lastplace }}</a>
+                    <a href="{{ url_for('midnightstandings.profile', name=show.Lastplace.replace(' ', '_')) }}">{{ show.Lastplace }}</a>
                     {% else %}
                     {{ show.Lastplace }}
                     {% endif %}

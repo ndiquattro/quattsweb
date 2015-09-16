@@ -1,14 +1,10 @@
-from flask import render_template, request, url_for
+from flask import render_template, request
 from . import midnightstandings
 import sqlite3 as lite
 import pandas as pd
-import os
 
 # Database path
-if os.uname()[0] == 'Darwin':
-    DBPATH = 'scripts/midnight_standings.db'
-else:
-    DBPATH = 'scripts/midnight_standings.db'
+DBPATH = 'scripts/midnight_standings.db'
 
 
 @midnightstandings.route('/')
@@ -88,11 +84,11 @@ def stats():
                            title='@midnight standings - Statistics')
 
 
-@midnightstandings.route('/profile')
-def profile():
+@midnightstandings.route('/profile/<name>')
+def profile(name):
 
     # Get Name
-    name = request.args.get('name').replace('_', ' ')
+    name = name.replace('_', ' ')
 
     # Get info about this person
     csql = 'SELECT * FROM counts WHERE Names = "{}"'.format(name)

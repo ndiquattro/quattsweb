@@ -51,12 +51,12 @@
                 <td class="text-center">{{ show.shownum }}</td>
                 <td>{{ show.airdate }}</td>
                 <td {% if show.Winner == name %}
-                    class="info text-center"
+                    class="info text-center">
                     {% else %}
-                    class="text-center"
-                    {% endif %}>
+                    class="text-center">
+                    {% endif %}
                     {% if show.Winner != 'None' %}
-                    <a href="/midnightstandings/profile?name={{ show.Winner|replace(' ', '_' )}}">{{ show.Winner }}</a>
+                    <a href="{{ url_for('midnightstandings.profile', name=show.Winner.replace(' ', '_')) }}">{{ show.Winner }}</a>
                     {% else %}
                     {{ show.Winner }}
                     {% endif %}
@@ -67,7 +67,7 @@
                     {% else %}
                     class="text-center"
                     {% endif %}>
-                    <a href="/midnightstandings/profile?name={{ show.Runnerup|replace(' ', '_' )}}">{{ show.Runnerup }}</a>
+                    <a href="{{ url_for('midnightstandings.profile', name=show.Runnerup.replace(' ', '_')) }}">{{ show.Runnerup }}</a>
                 </td>
                 {% else %}
                 {% set p1 = show.Runnerup.split(' and ')[0] %}
@@ -77,8 +77,8 @@
                     {% else %}
                     class="text-center"
                     {% endif %}>
-                    <a href="/midnightstandings/profile?name={{ p1|replace(' ', '_' )}}">{{ p1 }}</a> and
-                    <a href="/midnightstandings/profile?name={{ p2|replace(' ', '_' )}}">{{ p2 }}</a> (tie)
+                    <a href="{{ url_for('midnightstandings.profile', name=p1.replace(' ', '_')) }}">{{ p1 }}</a> and
+                    <a href="{{ url_for('midnightstandings.profile', name=p2.replace(' ', '_')) }}">{{ p2 }}</a> (tie)
                 </td>
                 {% endif %}
                 <td {% if show.Lastplace == name %}
@@ -87,7 +87,7 @@
                     class="text-center"
                     {% endif %}>
                     {% if show.Lastplace != 'None' %}
-                    <a href="/midnightstandings/profile?name={{ show.Lastplace|replace(' ', '_' )}}">{{ show.Lastplace }}</a>
+                    <a href="{{ url_for('midnightstandings.profile', name=show.Lastplace.replace(' ', '_')) }}">{{ show.Lastplace }}</a>
                     {% else %}
                     {{ show.Lastplace }}
                     {% endif %}

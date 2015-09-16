@@ -17,8 +17,7 @@ def mcb():
     try:
         ping = server.ping()
     except Exception as e:
-        print e
-        playnum = 'None'
+        return 'Server is down :('
     else:
         stat = 1
 
