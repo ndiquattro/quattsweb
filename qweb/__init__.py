@@ -9,5 +9,5 @@ qweb = Flask(__name__)
 qweb.config.from_pyfile('config.py')
 
 # Register Blueprints
-qweb.register_blueprint(midnightstandings, subdomain='midnightstandings')
+qweb.register_blueprint(midnightstandings, url_prefix='/midnightstandings')
 qweb.register_blueprint(mcb, url_prefix='/mcb')

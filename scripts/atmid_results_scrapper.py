@@ -1,3 +1,4 @@
+#!/home/nickof4/.virtualenvs/quatts/bin/python2.7
 # coding=utf-8
 # Pulls @midnight results from wikipedia and saves them.
 import wikipedia

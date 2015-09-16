@@ -1,10 +1,10 @@
-from flask import render_template, request
+from flask import render_template
 from . import midnightstandings
 import sqlite3 as lite
 import pandas as pd
 
 # Database path
-DBPATH = 'scripts/midnight_standings.db'
+DBPATH = '/home/nickof4/quattsweb/scripts/midnight_standings.db'
 
 
 @midnightstandings.route('/')
